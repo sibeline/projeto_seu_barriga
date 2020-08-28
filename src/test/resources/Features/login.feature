@@ -13,6 +13,6 @@ Esquema do Cenario: Login com
 
 
 	Exemplos:
-	| email    							   | senha           |
-	| "sibeline_marques@atlantico.com.br"  | "OjesedEve@#87" |
+	| email  		   | senha           |
+	| "xxxxxxxxxxxxxxxxxxxx"  | "xxxxxxxxxxxx" |
 
