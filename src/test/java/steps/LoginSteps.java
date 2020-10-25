@@ -1,5 +1,6 @@
 package steps;
 
+import core.Constantes;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
@@ -7,15 +8,13 @@ import org.junit.*;
 import org.junit.rules.TestName;
 import pages.LoginPage;
 import pages.TelaInicialPage;
+import util.Generator;
 
 
 public class LoginSteps {
 
     private TelaInicialPage telainicial;
     private LoginPage login;
-
-    @Rule //copia nome do metodo na screenshot
-    public TestName copiaMetodo = new TestName();
 
     public LoginSteps() {
 
@@ -27,14 +26,13 @@ public class LoginSteps {
     @Dado("^que o usuario esteja na tela de login$")
         public void queOUsuarioEstejaNaTelaDeLogin () {
             login.Init();
-            //login.pularCertificadoChrome();
         }
 
     @Quando("^digitar \"([^\"]*)\" e \"([^\"]*)\"$")
         public void digitarE (String email, String senha)  {
 
-            login.login(email);
-            login.senha(senha);
+        login.login(email);
+        login.senha(senha);
 
         }
 
@@ -43,13 +41,35 @@ public class LoginSteps {
             login.enter();
         }
 
-     @Entao("^o sistema ira para a tela inicial$")
+    @Entao("^o sistema ira para a tela inicial$")
         public void oSistemaIraParaATelaInicial () throws InterruptedException {
             // Write code here that turns the phrase above into concrete actions
             Thread.sleep(5000);
+            String nomeUsuarioTela = telainicial.NomeUsuario();
+            Assert.assertEquals(nomeUsuarioTela, "Bem vindo, joao!");
             Assert.assertEquals(true, telainicial.checkPage());
             login.Finish();
 
         }
+    @Quando("^clicar na opção Novo Usuário\\?$")
+    public void clicarNaOpçãoNovoUsuário() throws Throwable {
+        login.criarNovoUsuario();
+     }
+
+    @Quando("^preencher \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+    public void preencher(String nome, String email, String senha) throws Throwable {
+        String nomeUsuario = Generator.nome();
+        login.nome(nome);
+        login.login(nomeUsuario + "@gmail.com");
+        login.senha(senha);
+        login.cadastrar();
+    }
+    @Entao("^o sistema emitira uma mensagem de sucesso$")
+    public void oSistemaEmitiraUmaMensagemDeSucesso() throws Throwable {
+        String mensagemTela = login.popup();
+        Assert.assertEquals(Constantes.MENSAGEM_SUCESSO_NOVO_USUARIO, mensagemTela);
+        telainicial.Finish();
+
+    }
 }
 

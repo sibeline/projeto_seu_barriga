@@ -5,18 +5,20 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
     public static WebDriver navegador;
     protected WebDriverWait wait;
-    public String url = "https://odin.virgo.atlantico.net.br/#/";
+    public String url = "http://seubarriga.wcaquino.me/login";
+
 
     @Before
     public void Init(){
         // Abrindo o navegador
-        System.setProperty("webdriver.chrome.driver", "\\Webdriver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "\\webdriverJava\\webdriverJava\\src\\test\\resources\\WebDriver\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments( "--window-size=1920,1200", "--ignore-certificate-errors");
         options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
