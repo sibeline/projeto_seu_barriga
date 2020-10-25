@@ -18,7 +18,7 @@ import cucumber.api.junit.Cucumber;
                 "junit:target/cucumber-reports/report.xml" },
 
         tags = { // tags = "@TagQueSeraExecutada" or {"~@ignore"}
-                "@login" })
+                "@login, @logout, @movimentacao, @Conta " })
 public class RunCucumber {
 
 }
