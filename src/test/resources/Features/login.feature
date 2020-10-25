@@ -16,6 +16,7 @@ Contexto:
 	| email    							   | senha           |
 	| "testejoao12@gmail.com"  			   | "xxx123"      |
 
+
 @novoUsuario
     Esquema do Cenario: cadastro de novo usuario
 	Quando clicar na opção Novo Usuário?
